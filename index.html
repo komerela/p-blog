@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perplexity Computer — Easier &amp; More Expert Way to Build</title>
+  <meta name="description" content="How Koome Mwiti uses Perplexity Computer, reusable skill files, and autonomous agents to build scalable, production-ready projects faster than ever.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --color-bg:#f7f6f2;--color-surface:#f9f8f5;--color-surface-2:#fbfbf9;
+      --color-surface-offset:#f3f0ec;--color-divider:#dcd9d5;--color-border:#d4d1ca;
+      --color-text:#28251d;--color-text-muted:#7a7974;--color-text-faint:#bab9b4;
+      --color-text-inverse:#f9f8f4;--color-primary:#01696f;--color-primary-hover:#0c4e54;
+      --color-primary-highlight:#cedcd8;--color-success:#437a22;--color-blue:#006494;--color-purple:#7a39bb;
+      --shadow-sm:0 1px 2px oklch(0.2 0.01 80/0.06);--shadow-md:0 4px 12px oklch(0.2 0.01 80/0.08);
+      --shadow-lg:0 12px 32px oklch(0.2 0.01 80/0.12);
+      --font-display:'Instrument Serif',Georgia,serif;--font-body:'Inter','Helvetica Neue',sans-serif;
+      --text-xs:clamp(.75rem,.7rem + .25vw,.875rem);--text-sm:clamp(.875rem,.8rem + .35vw,1rem);
+      --text-base:clamp(1rem,.95rem + .25vw,1.125rem);--text-lg:clamp(1.125rem,1rem + .75vw,1.5rem);
+      --text-xl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem);--text-2xl:clamp(2rem,1.2rem + 2.5vw,3.5rem);
+      --text-hero:clamp(2.5rem,.5rem + 5vw,5.5rem);
+      --space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;--space-5:1.25rem;
+      --space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;--space-12:3rem;--space-16:4rem;
+      --space-20:5rem;--space-24:6rem;
+      --radius-sm:.375rem;--radius-md:.5rem;--radius-lg:.75rem;--radius-xl:1rem;--radius-full:9999px;
+      --transition-interactive:180ms cubic-bezier(.16,1,.3,1);
+      --content-narrow:640px;--content-default:780px;--content-wide:1100px;
+    }
+    [data-theme="dark"] {
+      --color-bg:#111110;--color-surface:#1a1918;--color-surface-2:#201f1d;
+      --color-surface-offset:#252422;--color-divider:#2a2927;--color-border:#333230;
+      --color-text:#e8e6e1;--color-text-muted:#888582;--color-text-faint:#514f4d;
+      --color-text-inverse:#1a1918;--color-primary:#4f98a3;--color-primary-hover:#227f8b;
+      --color-primary-highlight:#1e3538;--color-success:#6daa45;--color-blue:#5591c7;--color-purple:#a86fdf;
+      --shadow-sm:0 1px 2px oklch(0 0 0/.3);--shadow-md:0 4px 12px oklch(0 0 0/.4);--shadow-lg:0 12px 32px oklch(0 0 0/.5);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth;scroll-padding-top:var(--space-16)}
+    body{min-height:100dvh;line-height:1.7;font-family:var(--font-body);font-size:var(--text-base);color:var(--color-text);background-color:var(--color-bg);transition:background var(--transition-interactive),color var(--transition-interactive)}
+    img,svg{display:block;max-width:100%;height:auto}
+    p,li{text-wrap:pretty}
+    h1,h2,h3,h4{text-wrap:balance;line-height:1.15;font-family:var(--font-display)}
+    ::selection{background:oklch(from var(--color-primary) l c h/.2);color:var(--color-text)}
+    :focus-visible{outline:2px solid var(--color-primary);outline-offset:3px;border-radius:var(--radius-sm)}
+    a,button{transition:color var(--transition-interactive),background var(--transition-interactive)}
+    button{cursor:pointer;background:none;border:none;font:inherit;color:inherit}
+    .nav{position:sticky;top:0;z-index:100;background:oklch(from var(--color-bg) l c h/.87);backdrop-filter:blur(14px) saturate(1.4);border-bottom:1px solid oklch(from var(--color-text) l c h/.06);padding:var(--space-4) 0}
+    .nav-inner{max-width:var(--content-wide);margin:auto;padding-inline:var(--space-6);display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{display:flex;align-items:center;gap:var(--space-2);text-decoration:none;color:var(--color-text);font-family:var(--font-display);font-size:var(--text-lg);letter-spacing:-.02em}
+    .nav-logo svg{color:var(--color-primary)}
+    .nav-right{display:flex;align-items:center;gap:var(--space-4)}
+    .nav-tag{font-size:var(--text-xs);font-weight:600;padding:var(--space-1) var(--space-3);background:var(--color-primary-highlight);color:var(--color-primary);border-radius:var(--radius-full);text-decoration:none;letter-spacing:.04em;text-transform:uppercase}
+    .nav-tag:hover{background:oklch(from var(--color-primary) l c h/.25)}
+    .theme-toggle{width:36px;height:36px;display:grid;place-items:center;border-radius:var(--radius-md);color:var(--color-text-muted)}
+    .theme-toggle:hover{color:var(--color-text);background:oklch(from var(--color-text) l c h/.06)}
+    .hero{max-width:var(--content-wide);margin:auto;padding:clamp(var(--space-16),8vw,var(--space-24)) var(--space-6) var(--space-12);display:grid;gap:var(--space-8)}
+    .hero-meta{display:flex;align-items:center;gap:var(--space-3);font-size:var(--text-xs);color:var(--color-text-muted);font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+    .hero-meta-dot{width:4px;height:4px;border-radius:50%;background:var(--color-primary)}
+    .hero-headline{font-size:var(--text-hero);font-family:var(--font-display);line-height:1.05;letter-spacing:-.02em;max-width:14ch}
+    .hero-headline em{font-style:italic;color:var(--color-primary)}
+    .hero-sub{font-size:var(--text-lg);color:var(--color-text-muted);max-width:55ch;line-height:1.6}
+    .hero-cta{display:flex;align-items:center;gap:var(--space-4);flex-wrap:wrap}
+    .btn-primary{display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-3) var(--space-6);border-radius:var(--radius-full);background:var(--color-primary);color:#fff;font-weight:600;font-size:var(--text-sm);text-decoration:none}
+    .btn-primary:hover{background:var(--color-primary-hover)}
+    .btn-ghost{display:inline-flex;align-items:center;gap:var(--space-2);font-size:var(--text-sm);color:var(--color-text-muted);text-decoration:none;font-weight:500}
+    .btn-ghost:hover{color:var(--color-text)}
+    .article-layout{max-width:var(--content-wide);margin:auto;padding-inline:var(--space-6);display:grid;grid-template-columns:1fr min(var(--content-narrow),100%) 1fr;gap:0 var(--space-8)}
+    .article-layout>*{grid-column:2}
+    .breakout{grid-column:1/-1;max-width:var(--content-default);margin-inline:auto;width:100%}
+    .prose-section{padding-block:var(--space-10);border-bottom:1px solid oklch(from var(--color-text) l c h/.07)}
+    .prose-section:last-of-type{border-bottom:none}
+    .section-label{display:inline-flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-primary);margin-bottom:var(--space-5)}
+    .prose-section h2{font-size:var(--text-xl);margin-bottom:var(--space-5);letter-spacing:-.02em}
+    .prose-section p{font-size:var(--text-base);margin-bottom:var(--space-5);max-width:68ch}
+    .prose-section p:last-child{margin-bottom:0}
+    .skills-diagram{background:var(--color-surface);border:1px solid oklch(from var(--color-text) l c h/.07);border-radius:var(--radius-xl);padding:var(--space-8);margin-block:var(--space-8);box-shadow:var(--shadow-md)}
+    .skills-diagram-title{font-size:var(--text-sm);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-muted);margin-bottom:var(--space-6)}
+    .skill-tree{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(180px,100%),1fr));gap:var(--space-3)}
+    .skill-node{background:var(--color-surface-offset);border:1px solid oklch(from var(--color-text) l c h/.08);border-radius:var(--radius-lg);padding:var(--space-4) var(--space-5);transition:box-shadow var(--transition-interactive),transform var(--transition-interactive)}
+    .skill-node:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+    .skill-node-icon{width:32px;height:32px;border-radius:var(--radius-md);display:grid;place-items:center;margin-bottom:var(--space-3);font-size:1rem}
+    .skill-node-name{font-size:var(--text-sm);font-weight:600;color:var(--color-text);margin-bottom:var(--space-1)}
+    .skill-node-desc{font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.5}
+    .node-teal .skill-node-icon{background:var(--color-primary-highlight);color:var(--color-primary)}
+    .node-blue .skill-node-icon{background:oklch(from var(--color-blue) l c h/.12);color:var(--color-blue)}
+    .node-purple .skill-node-icon{background:oklch(from var(--color-purple) l c h/.12);color:var(--color-purple)}
+    .node-green .skill-node-icon{background:oklch(from var(--color-success) l c h/.12);color:var(--color-success)}
+    .workflow-steps{display:grid;gap:var(--space-4);margin-block:var(--space-8)}
+    .workflow-step{display:grid;grid-template-columns:44px 1fr;gap:var(--space-4);align-items:start}
+    .step-num{width:44px;height:44px;border-radius:var(--radius-full);background:var(--color-surface-offset);border:1px solid oklch(from var(--color-text) l c h/.08);display:grid;place-items:center;font-size:var(--text-sm);font-weight:700;color:var(--color-primary);font-family:var(--font-display);flex-shrink:0}
+    .step-content{padding-top:var(--space-2)}
+    .step-content h3{font-size:var(--text-base);font-weight:700;margin-bottom:var(--space-2);font-family:var(--font-body)}
+    .step-content p{font-size:var(--text-sm);color:var(--color-text-muted);max-width:58ch;line-height:1.6}
+    .stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(220px,100%),1fr));gap:var(--space-3);margin-block:var(--space-8)}
+    .stack-item{background:var(--color-surface);border:1px solid oklch(from var(--color-text) l c h/.07);border-radius:var(--radius-lg);padding:var(--space-5)}
+    .stack-item-label{font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--color-text-faint);margin-bottom:var(--space-2)}
+    .stack-item-value{font-size:var(--text-sm);font-weight:600;color:var(--color-text)}
+    .stack-item-note{font-size:var(--text-xs);color:var(--color-text-muted);margin-top:var(--space-1)}
+    .callout{background:var(--color-primary-highlight);border:1px solid oklch(from var(--color-primary) l c h/.25);border-radius:var(--radius-xl);padding:var(--space-6) var(--space-8);margin-block:var(--space-8)}
+    .callout p{color:var(--color-text);max-width:64ch;margin:0}
+    .callout p strong{color:var(--color-primary)}
+    .pull-quote{padding:var(--space-8) 0;border-top:2px solid var(--color-primary);border-bottom:1px solid oklch(from var(--color-text) l c h/.1);margin-block:var(--space-10)}
+    .pull-quote blockquote{font-family:var(--font-display);font-style:italic;font-size:var(--text-xl);line-height:1.35;letter-spacing:-.01em;color:var(--color-text);max-width:48ch}
+    .competition-banner{background:linear-gradient(135deg in oklab,var(--color-surface) 0%,oklch(from var(--color-primary) 0.18 0.04 192) 100%);border:1px solid oklch(from var(--color-primary) l c h/.2);border-radius:var(--radius-xl);padding:var(--space-8);margin-block:var(--space-8);display:grid;gap:var(--space-4)}
+    .competition-banner h3{font-size:var(--text-lg);letter-spacing:-.01em}
+    .competition-banner p{font-size:var(--text-sm);color:var(--color-text-muted);max-width:56ch;margin:0}
+    .competition-banner .btn-primary{width:fit-content}
+    .footer{max-width:var(--content-wide);margin:auto;padding:var(--space-12) var(--space-6);border-top:1px solid oklch(from var(--color-text) l c h/.08);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--space-4)}
+    .footer p{font-size:var(--text-xs);color:var(--color-text-muted)}
+    .footer a{color:var(--color-primary);text-decoration:none}
+    .footer a:hover{text-decoration:underline}
+    @media(max-width:640px){
+      .article-layout,.hero{padding-inline:var(--space-4)}
+      .nav-inner,.footer{padding-inline:var(--space-4)}
+      .hero-headline{font-size:clamp(2.2rem,10vw,3.5rem)}
+      .skills-diagram,.callout{padding:var(--space-5)}
+      .pull-quote blockquote{font-size:var(--text-lg)}
+    }
+  </style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="7" fill="currentColor" opacity=".1"/><path d="M7 14C7 10.134 10.134 7 14 7s7 3.134 7 7-3.134 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="14" r="2.5" fill="currentColor"/><path d="M14 7v2M14 19v2M7 14H9M19 14h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Koome Mwiti
+    </a>
+    <div class="nav-right">
+      <a href="https://www.linkedin.com/company/perplexity-ai/" target="_blank" rel="noopener noreferrer" class="nav-tag">@PerplexityAI</a>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-meta">
+    <span>April 2026</span><span class="hero-meta-dot"></span>
+    <span>Dev Workflow</span><span class="hero-meta-dot"></span>
+    <span>6 min read</span>
+  </div>
+  <h1 class="hero-headline">Perplexity Computer &mdash;<br><em>Easier</em> &amp; More Expert Way to Build</h1>
+  <p class="hero-sub">Reusable skill files, autonomous agents, and a personal architecture system that turns any project idea into a production-ready application.</p>
+  <div class="hero-cta">
+    <a href="#workflow" class="btn-primary">Read the workflow <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a href="https://www.linkedin.com/company/perplexity-ai/" target="_blank" rel="noopener noreferrer" class="btn-ghost">Follow @PerplexityAI &#8594;</a>
+  </div>
+</header>
+
+<main>
+<div class="article-layout">
+
+  <section class="prose-section">
+    <div class="section-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg> The Shift</div>
+    <h2>Building has never been easier &mdash; or more nuanced</h2>
+    <p>I marvel at how easy it has become to spin up a project today. But ease is deceptive. The real question isn&#8217;t whether you <em>can</em> ship something &mdash; it&#8217;s whether what you ship will hold up: at scale, on a patchy network, behind a locked-down firewall, or under a production security audit.</p>
+    <p>The difference between a weekend prototype and a deployable product comes down to architecture decisions made before a single line of application code is written. That&#8217;s the layer <a href="https://www.perplexity.ai/" target="_blank" rel="noopener noreferrer" style="color:var(--color-primary);text-decoration:none;font-weight:500">Perplexity Computer</a> has fundamentally changed for me &mdash; and I want to show you exactly how.</p>
+  </section>
+
+  <section class="prose-section">
+    <div class="section-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg> The Stack</div>
+    <h2>Architecture first, idea second</h2>
+    <p>Before I write a single line of feature code, I define the entire infrastructure. This is a discipline that took time to learn: the <em>how</em> of deployment, security, and observability needs to be decided before the <em>what</em> of product features.</p>
+  </section>
+
+  <div class="stack-grid breakout">
+    <div class="stack-item"><div class="stack-item-label">Frontend</div><div class="stack-item-value">React + Expo</div><div class="stack-item-note">Mobile-first; Next.js for web</div></div>
+    <div class="stack-item"><div class="stack-item-label">Backend</div><div class="stack-item-value">Django + Django Ninja</div><div class="stack-item-note">Fast async APIs with Python&#8217;s ecosystem</div></div>
+    <div class="stack-item"><div class="stack-item-label">Database</div><div class="stack-item-value">PostgreSQL / MongoDB</div><div class="stack-item-note">Relational for critical data; NoSQL for flexible schemas</div></div>
+    <div class="stack-item"><div class="stack-item-label">Deployment</div><div class="stack-item-value">Coolify + Docker</div><div class="stack-item-note">Self-hosted PaaS; Dokploy as alternative</div></div>
+    <div class="stack-item"><div class="stack-item-label">Network Security</div><div class="stack-item-value">Tailscale + Cloudflare</div><div class="stack-item-note">Zero-config VPN + CDN proxy for private servers</div></div>
+    <div class="stack-item"><div class="stack-item-label">Auth</div><div class="stack-item-value">Clerk / Supabase Auth</div><div class="stack-item-note">Supabase acquired Clerk &mdash; same auth layer</div></div>
+    <div class="stack-item"><div class="stack-item-label">Monitoring</div><div class="stack-item-value">Prometheus + Grafana</div><div class="stack-item-note">Open-source observability keeps client costs low</div></div>
+    <div class="stack-item"><div class="stack-item-label">Status Page</div><div class="stack-item-value">Custom Grafana Dashboard</div><div class="stack-item-note">Built from monitoring data &mdash; no extra SaaS bill</div></div>
+  </div>
+
+  <section class="prose-section" style="padding-top:0">
+    <h2>Transactions vs. posts: a database decision that matters</h2>
+    <p>Losing a social media post is an inconvenience. Losing a financial transaction or a health record could be a life-or-death event. When data has permanence stakes, PostgreSQL earns its place. When it&#8217;s high-velocity, schema-flexible data &mdash; activity logs, social feeds, media metadata &mdash; MongoDB makes the trade-off correctly.</p>
+  </section>
+
+  <section class="prose-section" id="workflow">
+    <div class="section-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg> The Method</div>
+    <h2>The skill file system: my best practices, codified</h2>
+    <p>Instead of re-explaining my architecture to an AI agent on every new project, I designed a set of <strong>reusable skill files</strong> &mdash; one for frontend, one for deployment, one for database patterns, one for monitoring. Each file encodes <em>my</em> best practices, not someone else&#8217;s boilerplate.</p>
+    <p>The critical insight: don&#8217;t inherit other people&#8217;s bugs. Most shared templates carry silent assumptions, outdated patterns, and debt you didn&#8217;t incur. Start from an analysis of your own past projects. Your skills are derived from your own battle-tested patterns &mdash; and <a href="https://www.linkedin.com/company/perplexity-ai/" target="_blank" rel="noopener noreferrer" style="color:var(--color-primary);text-decoration:none;font-weight:500">@PerplexityAI</a>&#8217;s Perplexity Computer makes generating them from that analysis easier than ever.</p>
+  </section>
+
+  <div class="skills-diagram breakout">
+    <div class="skills-diagram-title">Skill File Tree &mdash; Reusable Architecture Knowledge Base</div>
+    <div class="skill-tree">
+      <div class="skill-node node-teal"><div class="skill-node-icon">&#9881;</div><div class="skill-node-name">frontend.skill.md</div><div class="skill-node-desc">React/Next.js/Expo patterns, component structure, mobile-first design systems</div></div>
+      <div class="skill-node node-blue"><div class="skill-node-icon">&#128013;</div><div class="skill-node-name">backend.skill.md</div><div class="skill-node-desc">Django Ninja API patterns, async views, serializers, middleware, error handling</div></div>
+      <div class="skill-node node-purple"><div class="skill-node-icon">&#128451;</div><div class="skill-node-name">database.skill.md</div><div class="skill-node-desc">PostgreSQL schema design, migration patterns, MongoDB schemas, indexing strategy</div></div>
+      <div class="skill-node node-teal"><div class="skill-node-icon">&#128640;</div><div class="skill-node-name">deployment.skill.md</div><div class="skill-node-desc">Coolify/Dokploy Docker configs, Cloudflare DNS, SSL, zero-downtime deploys</div></div>
+      <div class="skill-node node-green"><div class="skill-node-icon">&#128274;</div><div class="skill-node-name">security.skill.md</div><div class="skill-node-desc">Tailscale mesh setup, Cloudflare proxy rules, private server patterns, secrets</div></div>
+      <div class="skill-node node-blue"><div class="skill-node-icon">&#128200;</div><div class="skill-node-name">monitoring.skill.md</div><div class="skill-node-desc">Prometheus scrapers, Grafana dashboards, alerting rules, status page from metrics</div></div>
+      <div class="skill-node node-purple"><div class="skill-node-icon">&#128272;</div><div class="skill-node-name">auth.skill.md</div><div class="skill-node-desc">Clerk/Supabase Auth integration, JWT, role-based access, session management</div></div>
+      <div class="skill-node node-green"><div class="skill-node-icon">&#129302;</div><div class="skill-node-name">[idea].skill.md</div><div class="skill-node-desc">Generated per project by Perplexity Computer &mdash; extends base skills with domain-specific logic</div></div>
+    </div>
+  </div>
+
+  <div class="pull-quote breakout">
+    <blockquote>&#8220;Skills are reusable &mdash; and it&#8217;s even easier with Perplexity Computer to generate them from an analysis of all your past projects.&#8221;</blockquote>
+  </div>
+
+  <section class="prose-section">
+    <div class="section-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg> Step by Step</div>
+    <h2>How I build a new project end-to-end</h2>
+    <p>From the moment I have an idea to the moment autonomous agents are generating production code against my specifications, this is the exact workflow I run.</p>
+  </section>
+
+  <div class="workflow-steps breakout">
+    <div class="workflow-step"><div class="step-num">1</div><div class="step-content"><h3>Write the idea and data flow</h3><p>I describe what the app does and how data moves from source to output &mdash; every entity, relationship, and state change. For a March Madness predictor: team rosters, historical performance, player scoring, model output format.</p></div></div>
+    <div class="workflow-step"><div class="step-num">2</div><div class="step-content"><h3>Break it into tasks with Perplexity</h3><p>I paste the full description and ask Perplexity to decompose the project into manageable, independently-shippable tasks. I get a clear backlog before a single line of code is written.</p></div></div>
+    <div class="workflow-step"><div class="step-num">3</div><div class="step-content"><h3>Create the GitHub repo with scaffolding</h3><p>I initialize the repo, commit a stack-tuned README and .gitignore, then connect Perplexity Computer. This gives the agent full context from day one.</p></div></div>
+    <div class="workflow-step"><div class="step-num">4</div><div class="step-content"><h3>Copy skills from the infrastructure repo</h3><p>I reference my shared GitHub skills repo and copy the relevant files into the new project. The agent has my frontend, backend, deployment, security, and monitoring best practices available as context &mdash; not from the internet, but from my own work.</p></div></div>
+    <div class="workflow-step"><div class="step-num">5</div><div class="step-content"><h3>Generate idea-specific skills with Perplexity Computer</h3><p>I ask Perplexity Computer to build any skill files the project needs that aren&#8217;t in the base set. I also enforce a line-of-code limit per file to keep things maintainable and prevent monstrous code files.</p></div></div>
+    <div class="workflow-step"><div class="step-num">6</div><div class="step-content"><h3>Let autonomous agents build and iterate</h3><p>With skills loaded, I instruct Perplexity Computer&#8217;s specialized agents &mdash; including Claude &mdash; to build the application. Agents understand my specs, follow my patterns, test output, and continuously improve. The skill files act as a contract they never break.</p></div></div>
+  </div>
+
+  <div class="callout breakout">
+    <p><strong>The real unlock:</strong> Once you have a skills library, you&#8217;re not rebuilding your architecture every time. You&#8217;re composing. Each new project starts with a proven foundation and extends it with only the domain-specific logic that&#8217;s actually new. The agents understand your constraints &mdash; file size limits, preferred patterns, deployment targets &mdash; because you&#8217;ve already written them down.</p>
+  </div>
+
+  <section class="prose-section">
+    <div class="section-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg> Deployment Reality</div>
+    <h2>Building for where your users actually are</h2>
+    <p>Scalability and security aren&#8217;t the only dimensions that matter at deployment time. If your users are in places like Moreno Valley, California, network conditions and fire-related disruptions are a design constraint just as real as your schema or your auth flow. Tailscale keeps the server private. Cloudflare proxies and caches at the edge. Docker ensures the same runtime everywhere. And monitoring tells you when performance degrades in the field &mdash; not after a user complaint.</p>
+    <p>The skill files encode all of this. When Perplexity Computer generates new project code using my deployment skill, these considerations are baked in by default &mdash; not bolted on later.</p>
+  </section>
+
+  <section class="prose-section" aria-labelledby="donate-heading">
+    <div class="section-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg> Take Action</div>
+    <h2 id="donate-heading">Support California wildfire victims</h2>
+    <p>I&#8217;m writing this from Moreno Valley, California, as our communities face yet another destructive fire season, including recent fires in Riverside County.[web:11][web:14] If you&#8217;re in a position to help, consider donating to the <a href="https://www.cafirefoundation.org/what-we-do/for-communities/disaster-relief" target="_blank" rel="noopener noreferrer" style="color:var(--color-primary);text-decoration:none;font-weight:500;">California Fire Foundation&#8217;s Wildfire &amp; Disaster Relief Fund</a>. Your support goes toward direct aid and long‑term recovery for families and firefighters on the front line.[web:7][web:15]</p>
+  </section>
+
+  <div class="competition-banner breakout">
+    <div>
+      <div class="section-label" style="margin-bottom:var(--space-3)"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg> From the same workflow</div>
+      <h3>Stock Pitch Competition &mdash; powered by Perplexity</h3>
+    </div>
+    <p>This same workflow is exactly how I&#8217;ve been running my stock pitch analysis for the <strong><a href="https://pplx.ai/pitch/slack" target="_blank" rel="noopener noreferrer" style="color:var(--color-primary);text-decoration:none">Perplexity Stock Pitch Competition</a></strong>. Deep research, decomposed tasks, structured output. The same system that builds software turns out to be just as powerful for financial analysis.</p>
+    <a href="https://pplx.ai/pitch/slack" target="_blank" rel="noopener noreferrer" class="btn-primary">View the Competition <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg></a>
+  </div>
+
+  <section class="prose-section">
+    <div class="section-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg> Final Thought</div>
+    <h2>Skills compound. Projects accelerate.</h2>
+    <p>The framework doesn&#8217;t just make the first project faster. It makes every subsequent project faster, because the skills library grows with every build. When something works well in production, it gets captured as a skill. When a pattern fails, the skill gets updated. The system learns from experience &mdash; your experience, not some averaged-out internet consensus.</p>
+    <p>Build your own skills. Connect them to <a href="https://www.linkedin.com/company/perplexity-ai/" target="_blank" rel="noopener noreferrer" style="color:var(--color-primary);text-decoration:none;font-weight:500">@PerplexityAI</a>&#8217;s autonomous agents. Then tell them what you want to build &mdash; and watch what happens.</p>
+  </section>
+
+</div>
+</main>
+
+<footer class="footer">
+  <p>Written by Koome Mwiti &middot; Moreno Valley, California &middot; April 2026</p>
+  <p><a href="https://www.linkedin.com/company/perplexity-ai/" target="_blank" rel="noopener noreferrer">@PerplexityAI</a> &nbsp;&middot;&nbsp; <a href="https://pplx.ai/pitch/slack" target="_blank" rel="noopener noreferrer">Stock Pitch Competition</a></p>
+</footer>
+
+<script>
+(function(){
+  const t=document.querySelector('[data-theme-toggle]'),r=document.documentElement;
+  let d='dark';r.setAttribute('data-theme',d);
+  if(t){
+    t.innerHTML='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+    t.addEventListener('click',()=>{
+      d=d==='dark'?'light':'dark';
+      r.setAttribute('data-theme',d);
+      t.setAttribute('aria-label','Switch to '+(d==='dark'?'light':'dark')+' mode');
+      t.innerHTML=d==='dark'
+        ?'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>'
+        :'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+    });
+  }
+})();
+</script>
+</body>
+</html>
